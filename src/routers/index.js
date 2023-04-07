@@ -1,4 +1,4 @@
-import homeRouter from './home'
+import homeRouter from './gym'
 let routes = [
   // 404
   {

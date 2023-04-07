@@ -7,17 +7,11 @@
   </div>
 </template>
 <script>
-/* eslint-disable */
-/* document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-  WeixinJSBridge.call('hideOptionMenu')
-})
-import { jssdksign } from '@/service/oauth-wechat'
-import { initWX } from '@/utils/wxsdk.js' */
 
 export default {
   components: {},
   created() {
-    window.addEventListener(
+/*     window.addEventListener(
       'orientationchange',
       function () {
         if (window.orientation == 90 || window.orientation == -90) {
@@ -25,27 +19,14 @@ export default {
         }
       },
       false
-    )
-
-/*     jssdksign().then((res) => {
-      let data = res
-      const param = {
-        appid: data.appid,
-        timestamp: data.timestamp,
-        nonceStr: data.nonceStr,
-        signature: data.signature
-      }
-      initWX(param)
-    }) */
+    ) */
   },
   mounted() {
-    // console.log(process.env.NODE_ENV)
     const client_width = document.body.clientWidth
     if (client_width > 750) {
       const ratio = 750 / client_width
       const $app = document.getElementById('app')
       const app_height = $app.clientHeight
-      console.log(app_height)
       $app.style.height = app_height / ratio + 'px'
       $app.style.transform = 'scale(' + ratio + ')'
       $app.style.transformOrigin = 'top'
