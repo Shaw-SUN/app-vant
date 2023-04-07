@@ -12,7 +12,7 @@ module.exports = {
     https: false,
     proxy: {
       '/api': {
-        target: 'https://shajiabang-suishoupai.2500city.com', //测试
+        target: 'http://moonquakes.club:32093', //测试
         ws: false,
         changeOrigin: true
       },
