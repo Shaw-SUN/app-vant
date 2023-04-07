@@ -8,7 +8,15 @@ let routes = [
     meta: {
       title: '页面不见了'
     }
-  }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Login.vue'),
+    meta: {
+      title: '登录'
+    }
+  },
 ]
 
 routes = [...homeRouter, ...routes]

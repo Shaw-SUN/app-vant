@@ -5,15 +5,12 @@ import '@/utils/axios'
 import '@/utils/lodash'
 import '@/assets/css/common.styl'
 import '@/utils/js-md5'
-// import './utils/filter'
-import { Slider, Toast, Empty, Lazyload, Icon, Image as VanImage, Tabbar, TabbarItem, Tab, Tabs, Swipe, SwipeItem, PullRefresh, List, Uploader, Dialog, Loading, SidebarItem, Sidebar, Form, Field, Picker, Popup, CellGroup, Cell, Button, DatetimePicker, Cascader, ImagePreview } from 'vant'
-
 import { parseTime } from '@/utils/js-tools'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
-
 import MapLayer from '@/components/MapLayer'
-Vue.use(VueAwesomeSwiper /* { default options with global component } */)
+
+import { Slider, Toast, Empty, Lazyload, Icon, Image as VanImage, Tabbar, TabbarItem, Tab, Tabs, Swipe, SwipeItem, PullRefresh, List, Uploader, Dialog, Loading, SidebarItem, Sidebar, Form, Field, Picker, Popup, CellGroup, Cell, Button, DatetimePicker, Cascader, ImagePreview } from 'vant'
 
 Vue.use(Toast)
 Vue.use(Empty)
@@ -43,9 +40,12 @@ Vue.use(Button)
 Vue.use(DatetimePicker)
 Vue.use(Cascader)
 Vue.use(ImagePreview)
+
 import VueTouch from 'vue-touch'
 Vue.use(VueTouch, { name: 'v-touch' })
+Vue.use(VueAwesomeSwiper)
 
+Vue.use(MapLayer)
 Vue.prototype.parseTime = parseTime
 Vue.use(Lazyload, {
   lazyComponent: true,
@@ -54,9 +54,6 @@ Vue.use(Lazyload, {
 
 //Vue.config.ignoredElements = ['wx-open-launch-weapp']
 
-// import audioDialog from '@/components/audio/index'
-// Vue.use(audioDialog)
-Vue.use(MapLayer)
 Vue.config.productionTip = false
 new Vue({
   router,
