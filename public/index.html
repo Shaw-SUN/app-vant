@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- <link rel="dns-prefetch" href="//cdnfile-s3.gususerv.com" /> -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <title></title>
+   <!--  <script src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script> -->
+<!--     <script type="text/javascript">
+        window._AMapSecurityConfig = {
+          securityJsCode: 'd4462ba4e9b89e0a730e973097ff91b1'
+        } -->
+      <!-- 强制禁止用户修改微信客户端的字体大小---begin--- -->
+        <!-- ;(function () {
+          if (typeof WeixinJSBridge == 'object' && typeof WeixinJSBridge.invoke == 'function') {
+            handleFontSize()
+          } else {
+            if (document.addEventListener) {
+              document.addEventListener('WeixinJSBridgeReady', handleFontSize, false)
+            } else if (document.attachEvent) {
+              document.attachEvent('WeixinJSBridgeReady', handleFontSize)
+              document.attachEvent('onWeixinJSBridgeReady', handleFontSize)
+            }
+          }
+          function handleFontSize() {
+            // 设置网页字体为默认大小
+            WeixinJSBridge.invoke('setFontSizeCallback', { fontSize: 0 })
+            // 重写设置网页字体大小的事件
+            WeixinJSBridge.on('menu:setfont', function () {
+              WeixinJSBridge.invoke('setFontSizeCallback', { fontSize: 0 })
+            })
+          }
+        })()
+    </script> -->
+    <!-- 强制禁止用户修改微信客户端的字体大小---end--- -->
+    <!-- 3.针对ios手机调整样式 -->
+    <style>
+      #body {
+        /* ios系统字体被手动调大优化 */
+        -webkit-text-size-adjust: 100% !important;
+        text-size-adjust: 100% !important;
+        -moz-text-size-adjust: 100% !important;
+      }
+      .van-skeleton {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        padding: 0 4.26667vw;
+      }
+      .van-skeleton--animate {
+        -webkit-animation: van-skeleton-blink 1.2s ease-in-out infinite;
+        animation: van-skeleton-blink 1.2s ease-in-out infinite;
+      }
+      .van-skeleton__avatar--round {
+        border-radius: 266.4vw;
+      }
+      .van-skeleton__avatar {
+        -webkit-flex-shrink: 0;
+        flex-shrink: 0;
+        width: 8.53333vw;
+        height: 8.53333vw;
+        margin-right: 4.26667vw;
+        background-color: #f2f3f5;
+      }
+      .van-skeleton__avatar + .van-skeleton__content {
+        padding-top: 2.13333vw;
+      }
+      .van-skeleton__content {
+        width: 100%;
+      }
+      .van-skeleton__title {
+        width: 40%;
+        margin: 0;
+      }
+      .van-skeleton__row,
+      .van-skeleton__title {
+        height: 4.26667vw;
+        background-color: #f2f3f5;
+      }
+      .van-skeleton__title + .van-skeleton__row {
+        margin-top: 5.33333vw;
+      }
+      .van-skeleton__row:not(:first-child) {
+        margin-top: 3.2vw;
+      }
+      .van-skeleton__row,
+      .van-skeleton__title {
+        height: 4.26667vw;
+        background-color: #f2f3f5;
+      }
+      .van-skeleton__row,
+      .van-skeleton__title {
+        height: 4.26667vw;
+        background-color: #f2f3f5;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but boilerplate-mobile doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+      <div class="van-skeleton van-skeleton--animate">
+        <div class="van-skeleton__avatar van-skeleton__avatar--round"></div>
+        <div class="van-skeleton__content">
+          <h3 class="van-skeleton__title"></h3>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 100%;"></div>
+          <div class="van-skeleton__row" style="width: 60%;"></div>
+        </div>
+      </div>
+    </div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

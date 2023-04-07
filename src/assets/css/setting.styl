@@ -1,0 +1,68 @@
+// 基本色
+base-color = #2957A5
+base-rgbcolor(opacity)
+  background-color rgba(41, 87, 165, opacity)
+// 基本渐变尾色
+base-end-color = #F7F9F9
+// 基本色轻色
+base-light-color = #7296D4
+
+uniform-font-color()
+  color base-color
+uniform-background-color()
+  background-color base-color
+uniform-background-rgbcolor(opacity)
+  base-rgbcolor(opacity)
+
+set-background-img(path)
+  background-repeat no-repeat
+  background-size 100% 100%
+  background-image url(path)
+
+set-background-size()
+  background-repeat no-repeat
+  background-size 100% 100%
+
+set-absolute-center()
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+
+set-flex-center()
+  display flex
+  justify-content center
+  align-items center
+
+set-single-line-text-overfow()
+  overflow hidden //超出的文本隐藏
+  text-overflow ellipsis //溢出用省略号显示
+  white-space nowrap //溢出不换行
+
+set-more-line-text-over(line)
+  display -webkit-box
+  overflow hidden
+  -webkit-line-clamp line
+  -webkit-box-orient vertical
+  word-break break-all
+
+set-user-select-none()
+  -webkit-user-select none
+  -moz-user-select none
+  -ms-user-select none
+  user-select none
+
+set-placeholder-color()
+  ::-webkit-input-placeholder
+    color #dddbdb
+  :-moz-placeholder
+    color #dddbdb
+  ::-moz-placeholder
+    color #dddbdb
+  :-ms-input-placeholder
+    color #dddbdb
+// 页面背景渐变
+page-bg-gradient() {
+  background: linear-gradient(180deg, base-color 0%, base-end-color 320px);
+}
+  
