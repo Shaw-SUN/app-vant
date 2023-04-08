@@ -10,7 +10,39 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'
 import MapLayer from '@/components/MapLayer'
 
-import { Slider, Toast, Empty, Lazyload, Icon, Image as VanImage, Tabbar, TabbarItem, Tab, Tabs, Swipe, SwipeItem, PullRefresh, List, Uploader, Dialog, Loading, SidebarItem, Sidebar, Form, Field, Picker, Popup, CellGroup, Cell, Button, DatetimePicker, Cascader, ImagePreview } from 'vant'
+import {
+  Slider,
+  Toast,
+  Empty,
+  Lazyload,
+  Icon,
+  Image as VanImage,
+  Tabbar,
+  TabbarItem,
+  Tab,
+  Tabs,
+  Swipe,
+  SwipeItem,
+  PullRefresh,
+  List,
+  Uploader,
+  Dialog,
+  Loading,
+  SidebarItem,
+  Sidebar,
+  Form,
+  Field,
+  Picker,
+  Popup,
+  CellGroup,
+  Cell,
+  Button,
+  DatetimePicker,
+  Cascader,
+  ImagePreview,
+  RadioGroup,
+  Radio
+} from 'vant'
 
 Vue.use(Toast)
 Vue.use(Empty)
@@ -40,6 +72,8 @@ Vue.use(Button)
 Vue.use(DatetimePicker)
 Vue.use(Cascader)
 Vue.use(ImagePreview)
+Vue.use(Radio)
+Vue.use(RadioGroup)
 
 import VueTouch from 'vue-touch'
 Vue.use(VueTouch, { name: 'v-touch' })

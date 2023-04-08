@@ -10,17 +10,6 @@
 
 export default {
   components: {},
-  created() {
-/*     window.addEventListener(
-      'orientationchange',
-      function () {
-        if (window.orientation == 90 || window.orientation == -90) {
-          console.log('横屏了')
-        }
-      },
-      false
-    ) */
-  },
   mounted() {
     const client_width = document.body.clientWidth
     if (client_width > 750) {
@@ -38,7 +27,6 @@ export default {
 #app {
   width: 100%;
   height: 100%
-  // padding: 100px 0 100px
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;

@@ -1,5 +1,10 @@
 <template>
-  <div>1111111111</div>
+  <div>
+    <div>van-search</div>
+    <div>van-list
+      <div>van-card</div>
+    </div>
+  </div>
 </template>
 
 <script>
