@@ -41,7 +41,9 @@ import {
   Cascader,
   ImagePreview,
   RadioGroup,
-  Radio
+  Radio,
+  Search,
+  Card
 } from 'vant'
 
 Vue.use(Toast)
@@ -74,7 +76,8 @@ Vue.use(Cascader)
 Vue.use(ImagePreview)
 Vue.use(Radio)
 Vue.use(RadioGroup)
-
+Vue.use(Search)
+Vue.use(Card)
 import VueTouch from 'vue-touch'
 Vue.use(VueTouch, { name: 'v-touch' })
 Vue.use(VueAwesomeSwiper)

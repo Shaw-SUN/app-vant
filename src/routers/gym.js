@@ -1,16 +1,13 @@
-let routes = [
-  // 首页
+let gymRoutes = [
   {
-    path: '/list',
+    path: '/gym/list',
     name: 'Gym',
     component: () => import('@/views/gym/List.vue'),
     meta: {
-      title: '首页',
+      title: '附近健身房',
       keepAlive: false
     },
   },
 ]
 
-routes = [...routes]
-
-export default routes
+export default gymRoutes

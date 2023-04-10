@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <van-tabs v-model="loginType" background="transparent" class="tab-bar" color="#4f81c7">
-      <van-tab title="密码登录" name="username" class="tabs" >
+      <van-tab title="密码登录" name="username" class="tabs">
         <van-cell-group inset>
           <van-form @submit="onSubmit">
             <van-field v-model="userForm.mobile" label="手机号" clearable type="tel" placeholder="请输入" :rules="[{ required: true, message: '请填写正确的手机号' }]" />
@@ -46,7 +46,7 @@
             </van-popup>
             <van-field name="uploader" label="头像">
               <template #input>
-                <van-uploader v-model="uploader" multiple :max-count="1" :after-read="afterRead"/>
+                <van-uploader v-model="uploader" multiple :max-count="1" :after-read="afterRead" />
               </template>
             </van-field>
           </van-form>
@@ -111,28 +111,22 @@ export default {
       }, 1000)
     },
     onConfirm(time) {
-      this.registerForm.birthday = parseTime(time,'{y}-{m}-{d}')
+      this.registerForm.birthday = parseTime(time, '{y}-{m}-{d}')
       this.showTimePicker = false
     },
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
-      console.log(file);
-    },
+      console.log(file)
+    }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.page-container {
-  width: 100%
-  height: 100%
-  overflow-y: scroll;
-  background-color #fafafa
-  .tab-bar {
-    margin: 50px 0 70px 0
-    .tabs {
-      margin-top: 50px
-    }
+.tab-bar {
+  margin: 50px 0 70px 0
+  .tabs {
+    margin-top: 50px
   }
 }
 </style>

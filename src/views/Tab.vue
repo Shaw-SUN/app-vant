@@ -1,10 +1,9 @@
 <template>
   <div>
-    <van-tabbar v-model="active" fixed z-index="999">
-      <van-tabbar-item name="home" icon="home-o">标签</van-tabbar-item>
-      <van-tabbar-item name="search" icon="search">标签</van-tabbar-item>
-      <van-tabbar-item name="friends" icon="friends-o">标签</van-tabbar-item>
-      <van-tabbar-item name="setting" icon="setting-o">标签</van-tabbar-item>
+    <van-tabbar fixed z-index="999" route>
+      <van-tabbar-item replace to="/gym/list" icon="guide-o">附近健身房</van-tabbar-item>
+      <van-tabbar-item replace to="/order/list" icon="orders-o">我的订单</van-tabbar-item>
+      <van-tabbar-item replace to="/my/info" icon="user-o">个人中心</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -12,10 +11,9 @@
 <script>
 export default {
   data() {
-    return {
-      active: 'home'
-    }
-  }
+    return {}
+  },
+  methods: {}
 }
 </script>
 

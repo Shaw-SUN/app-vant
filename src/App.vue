@@ -4,12 +4,13 @@
       <router-view v-if="$route.meta.keepAlive"></router-view>
     </keep-alive>
     <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <tab v-if="$route.path !== '/login'"></tab>
   </div>
 </template>
 <script>
-
+import Tab from '@/views/Tab.vue'
 export default {
-  components: {},
+  components: { Tab },
   mounted() {
     const client_width = document.body.clientWidth
     if (client_width > 750) {
@@ -78,5 +79,11 @@ html {
     transform: translate(-50%, -50%);
     text-align :center;
   }
+}
+.page-container {
+  width: 100%
+  height: 100%
+  overflow-y: scroll;
+  background-color #fafafa
 }
 </style>

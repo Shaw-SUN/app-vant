@@ -1,6 +1,8 @@
-import homeRouter from './gym'
+import gymRoutes from './gym.js'
+import myRoutes from './personal.js'
+
+
 let routes = [
-  // 404
   {
     path: '*',
     name: '404',
@@ -16,9 +18,9 @@ let routes = [
     meta: {
       title: '登录'
     }
-  },
+  }
 ]
 
-routes = [...homeRouter, ...routes]
+routes = [...myRoutes, ...gymRoutes, ...routes]
 
 export default routes
