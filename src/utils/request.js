@@ -21,7 +21,7 @@ let preventDefaultNet = false
 // request拦截器
 service.interceptors.request.use(
   (config) => {
-    const { url } = config
+    const { method, data, contentType, url } = config
     preventDefault = config.preventDefault
     preventDefaultNet = config.preventDefaultNet
     // url含有undefined取消请求
@@ -32,39 +32,14 @@ service.interceptors.request.use(
     }
     if (process.env.NODE_ENV !== 'development') {
       config.baseURL = process.env.VUE_APP_BASE_API
-      if (url.startsWith('/api/news')) {
-        config.baseURL = process.env.VUE_APP_FANGYI_API
-      }
-      if (url.startsWith('/api/v4')) {
-        config.baseURL = process.env.VUE_APP_BASE_APP
-      }
-      if (url.startsWith('/api/rongzhengwu') || url.startsWith('/api/vod')) {
-        config.baseURL = process.env.VUE_APP_BASE_CAPP
-      }
-      // 文件上传服务--修改头像
-      console.log(url)
-      console.log(url.startsWith('/v4/avatars'))
-      console.log(process.env.VUE_APP_BASE_FILE)
-
-      if (url.startsWith('/v4/avatars')) {
-        config.baseURL = process.env.VUE_APP_BASE_FILE
-      }
     }
-    // // 拷贝自今吴江云城市签名
-    // if (config.params) {
-    //   Object.assign(config.params, getSignature())
-    //   Object.assign(config.params, { client_id: 320505 })
-    // } else if (config.data) {
-    //   Object.assign(config.data, getSignature())
-    //   Object.assign(config.data, { client_id: 320505 })
-    // }
     // 是否需要设置 token
     const isToken = (config.headers || {}).isToken === false
     if (getToken() && !isToken) {
-      config.headers['X-Authorization'] ='Bearer '+ getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
+      config.headers['X-Authorization'] = 'Bearer ' + getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     }
     // 如果设置了Content-Type: "multipart/form-data"
-    if (config.headers && config.headers['Content-Type'] == 'multipart/form-data') {
+    /* if (config.headers && config.headers['Content-Type'] == 'multipart/form-data') {
       config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
       config.data = qs.stringify(config.data)
     } else {
@@ -75,8 +50,17 @@ service.interceptors.request.use(
       if (config.data) {
         config.data = qs.parse(qs.stringify(config.data))
       }
-    }
+    } */
     // console.log(config, 'config')
+
+    if (contentType === 'json') {
+      config.headers['Content-Type'] = 'application/json'
+    } else if (method !== 'get' && _.isObject(data)) {
+      if (typeof config.headers['Content-Type'] === 'undefined') {
+        // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+        config.data = qs.stringify(data)
+      }
+    }
     return config
   },
   (error) => {
@@ -88,8 +72,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (res) => {
     // 未设置状态码则默认成功状态
-    const code = res.data.code || 200
-    if (code == 200) {
+    //const code = res.data.code || 200
+    if (res.status == 200) {
       return res.data
     } else {
       // 是否取消默认处理

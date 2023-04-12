@@ -43,7 +43,8 @@ import {
   RadioGroup,
   Radio,
   Search,
-  Card
+  Card,
+  Tag
 } from 'vant'
 
 Vue.use(Toast)
@@ -78,6 +79,8 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(Search)
 Vue.use(Card)
+Vue.use(Tag)
+
 import VueTouch from 'vue-touch'
 Vue.use(VueTouch, { name: 'v-touch' })
 Vue.use(VueAwesomeSwiper)
