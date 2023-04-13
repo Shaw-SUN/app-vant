@@ -1,19 +1,23 @@
 <template>
   <div class="page-container">
-    <van-search v-model="params.name" placeholder="搜索" shape="round"></van-search>
-    <van-cell title="当前定位" icon="location-o" center class="location" />
+    <van-search v-model="params.name" placeholder="搜索" shape="round" @search="getList"></van-search>
+    <van-cell v-if="params.longitude == 0" title="未获取到当前定位" icon="location-o" center value="重新获取" is-link @click="getLocation" class="location" />
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" class="list">
-        <van-card v-for="item in list" :key="item" desc="地址" thumb="https://img01.yzcdn.cn/vant/ipad.jpeg" class="card">
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="getLocation" class="list">
+        <van-dropdown-menu>
+          <van-dropdown-item v-model="params.state" :options="option1" @change="getList" />
+          <van-dropdown-item v-model="params.distance" :options="option2" @change="getList" />
+        </van-dropdown-menu>
+        <van-card v-for="(item, index) in list" :key="index" :desc="item.address" :thumb="item.logoUrl" class="card" @click="toDetail(item.id)">
           <template #title>
-            <div class="name">名称</div>
+            <div class="name">{{ item.name }}</div>
           </template>
           <template #tags>
-            <van-tag color="#e9fadd" text-color="#b8e4c9" class="tag"><van-icon name="clock-o" />12:00-1:00</van-tag>
-            <van-tag color="#ebe6e6" text-color="#ff896b"><van-icon name="phone-o" />178777777</van-tag>
+             <van-tag color="#e9fadd" text-color="#b8e4c9" class="tag"><van-icon name="expand-o" />{{ item.area }}平方米</van-tag>
+            <van-tag color="#ebe6e6" text-color="#ff896b"><van-icon name="phone-o" />{{ item.phone }}</van-tag>
           </template>
           <template #num>
-            <div><van-icon name="location-o" />距离2km</div>
+            <div><van-icon name="location-o" />距离{{ item.distanceStr }}</div>
           </template>
         </van-card>
       </van-list>
@@ -33,6 +37,17 @@ export default {
         distance: '',
         state: '1'
       },
+      option1: [
+        { text: '综合排序', value: '1' },
+        { text: '距离最近', value: '2' }
+      ],
+      option2: [
+        { text: '默认距离', value: '' },
+        { text: '1km', value: '1' },
+        { text: '3km', value: '3' },
+        { text: '5km', value: '5' },
+        { text: '10km', value: '10' }
+      ],
       //列表
       list: [],
       loading: false,
@@ -41,12 +56,19 @@ export default {
     }
   },
   mounted() {
-    this.getLocation()
+    //this.getLocation()
   },
   methods: {
     getList() {
+      if (this.refreshing) {
+        this.list = []
+        this.refreshing = false
+      }
       getGymList(this.params).then((res) => {
         this.list = res.data
+        // 加载状态结束
+        this.loading = false
+        this.finished = true
       })
     },
     /**获取地图定位*/
@@ -83,31 +105,19 @@ export default {
         alert('Geolocation is not supported by this browser.')
       }
     },
-    onLoad() {
-      setTimeout(() => {
-        if (this.refreshing) {
-          this.list = []
-          this.refreshing = false
-        }
-
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1)
-        }
-        this.loading = false
-
-        if (this.list.length >= 40) {
-          this.finished = true
-        }
-      }, 1000)
-    },
     onRefresh() {
       // 清空列表数据
       this.finished = false
-
       // 重新加载数据
       // 将 loading 设置为 true，表示处于加载状态
       this.loading = true
-      this.onLoad()
+      this.getList()
+    },
+    toDetail(id){
+      this.$router.push({
+        path: '/gym/detail',
+        query: { id: id }
+      })
     }
   }
 }
@@ -119,8 +129,8 @@ export default {
 }
 .list {
   margin-top 20px
-  .card {
-    background-color #ffffff
+  /deep/.card {
+      background #ffffff
     .name {
       font-size: 30px
       font-weight: 500

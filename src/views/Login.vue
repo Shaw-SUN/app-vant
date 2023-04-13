@@ -3,7 +3,7 @@
     <van-tabs v-model="loginType" background="transparent" class="tab-bar" color="#4f81c7">
       <van-tab title="密码登录" name="password" class="tabs">
         <van-cell-group inset>
-          <van-form>
+          <van-form ref="userForm">
             <van-field v-model="userForm.mobile" label="手机号" clearable type="tel" placeholder="请输入" :rules="[{ pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/, message: '请填写正确的手机号' }]" />
             <van-field v-model="userForm.password" type="password" clearable name="密码" placeholder="请输入" label="密码" :rules="[{ required: true, message: '请填写密码' }]" />
           </van-form>
@@ -11,11 +11,11 @@
       </van-tab>
       <van-tab title="短信登录" name="phone" class="tabs">
         <van-cell-group inset>
-          <van-form>
+          <van-form ref="mobileForm">
             <van-field v-model="mobileForm.mobile" label="手机号" clearable type="tel" placeholder="请输入" :rules="[{ pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/, message: '请填写正确的手机号' }]" />
             <van-field v-model="mobileForm.code" center clearable label="短信验证码" placeholder="请输入" :rules="[{ required: true, message: '请填写验证码' }]">
               <template #button>
-                <van-button size="small" round plain type="info" :disabled="sendStatus === 'loading'" @click="getCode(mobileForm.mobile)">{{ sendText }}</van-button>
+                <van-button size="small" round plain type="info" native-type="button" :disabled="sendStatus === 'loading'" @click="getCode(mobileForm.mobile)">{{ sendText }}</van-button>
               </template>
             </van-field>
           </van-form>
@@ -23,11 +23,11 @@
       </van-tab>
       <van-tab title="注册" name="register" class="tabs">
         <van-cell-group inset>
-          <van-form>
+          <van-form ref="registerForm">
             <van-field v-model="registerForm.mobile" label="手机号" clearable type="tel" placeholder="请输入" :rules="[{ pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/, message: '请填写正确的手机号' }]" />
             <van-field v-model="registerForm.code" center clearable label="短信验证码" placeholder="请输入" :rules="[{ required: true, message: '请填写验证码' }]">
               <template #button>
-                <van-button size="small" round plain type="info" :disabled="sendStatus === 'loading'" @click="getCode(registerForm.mobile)">{{ sendText }}</van-button>
+                <van-button size="small" round plain type="info" native-type="button" :disabled="sendStatus === 'loading'" @click="getCode(registerForm.mobile)">{{ sendText }}</van-button>
               </template>
             </van-field>
             <van-field v-model="registerForm.password" type="password" clearable name="密码" placeholder="请输入" label="密码" :rules="[{ required: true, message: '请填写密码' }]" />
@@ -68,8 +68,8 @@ export default {
   data() {
     return {
       loginType: 'password',
-      userForm: { mobile: '', password: '' },
-      mobileForm: { mobile: '', code: '' },
+      userForm: { mobile: '15189802312', password: 'asd521asd' },
+      mobileForm: { mobile: '17712558848', code: '' },
       registerForm: { mobile: '', code: '', password: '', nickname: '', gender: '1', avatarUrl: '', birthday: '' },
       //验证码
       sendText: '发送验证码',
@@ -86,23 +86,27 @@ export default {
   methods: {
     onSubmit() {
       if (this.loginType === 'password') {
-        this.userForm.password = this.$md5(this.userForm.password)
-        passWordLogin(this.userForm).then((res) => {
-          setToken(res.data.token)
-          this.$router.push('/gym/list')
+        this.$refs.userForm.validate().then(() => {
+          passWordLogin(this.userForm).then((res) => {
+            setToken(res.data.token)
+            this.$router.push('/gym/list')
+          })
         })
       } else if (this.loginType === 'phone') {
-        mobileLogin(this.mobileForm).then((res) => {
-          setToken(res.data.token)
-          this.$router.push('/gym/list')
+        this.$refs.mobileForm.validate().then(() => {
+          mobileLogin(this.mobileForm).then((res) => {
+            setToken(res.data.token)
+            this.$router.push('/gym/list')
+          })
         })
       } else if (this.loginType === 'register') {
         if (this.registerForm.avatarUrl) {
-          this.registerForm.password = this.$md5(this.registerForm.password)
-          this.registerForm.birthday = getTimestamp(this.registerForm.birthday, 10)
-          register(this.registerForm).then((res) => {
-            setToken(res.data.token)
-            this.$router.push('/gym/list')
+          this.$refs.registerForm.validate().then(() => {
+            this.registerForm.birthday = getTimestamp(this.registerForm.birthday, 10)
+            register(this.registerForm).then((res) => {
+              setToken(res.data.token)
+              this.$router.push('/gym/list')
+            })
           })
         } else {
           this.$toast('请输入上传头像')
@@ -113,8 +117,9 @@ export default {
       if (this.sendStatus === 'loading') {
         return
       }
+      let pattern1 = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/
       // 发送获取验证码的请求
-      if (mobileNumber) {
+      if (pattern1.test(mobileNumber)) {
         getCaptcha({ mobile: mobileNumber }).then(() => {
           // 更新按钮状态
           this.sendStatus = 'loading'
@@ -135,7 +140,7 @@ export default {
           }, 1000)
         })
       } else {
-        this.$toast('请输入手机号')
+        this.$toast('请输入正确的手机号')
       }
     },
     onConfirm(time) {

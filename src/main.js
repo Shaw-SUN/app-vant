@@ -44,7 +44,11 @@ import {
   Radio,
   Search,
   Card,
-  Tag
+  Tag,
+  NavBar,
+  Rate,
+  DropdownMenu,
+  DropdownItem
 } from 'vant'
 
 Vue.use(Toast)
@@ -80,6 +84,10 @@ Vue.use(RadioGroup)
 Vue.use(Search)
 Vue.use(Card)
 Vue.use(Tag)
+Vue.use(NavBar)
+Vue.use(Rate)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
 
 import VueTouch from 'vue-touch'
 Vue.use(VueTouch, { name: 'v-touch' })

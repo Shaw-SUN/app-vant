@@ -72,8 +72,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   (res) => {
     // 未设置状态码则默认成功状态
-    //const code = res.data.code || 200
-    if (res.status == 200) {
+    const code = res.data.code || 200
+    if (res.status == 200 && code !== 500) {
       return res.data
     } else {
       // 是否取消默认处理

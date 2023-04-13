@@ -12,7 +12,7 @@ module.exports = {
     https: false,
     proxy: {
       '/api': {
-        target: 'http://moonquakes.club:32093', //测试
+        target: 'http://moonquakes.club', //测试
         ws: false,
         changeOrigin: true
       },
