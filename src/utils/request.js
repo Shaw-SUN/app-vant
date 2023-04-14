@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken } from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
 import errorCode from '@/utils/errorode'
 // import getSignature from './signature'
 import { Toast } from 'vant'
@@ -73,8 +73,12 @@ service.interceptors.response.use(
   (res) => {
     // 未设置状态码则默认成功状态
     const code = res.data.code || 200
-    if (res.status == 200 && code !== 500) {
+    if (res.status == 200 && code !== 500 && code !== 10000) {
       return res.data
+    } else if (res.status == 200 && code == 10000) {
+      removeToken()
+      
+      this.$router.push('/login')
     } else {
       // 是否取消默认处理
       if (preventDefault) {

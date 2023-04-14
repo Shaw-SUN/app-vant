@@ -47,7 +47,7 @@
             <div class="content">{{ item.content }}</div>
             <div><van-image width="80" height="80" :src="detail.detailUrl" /></div>
           </template>
-          <template #label>{{ item.createdAt }}</template>
+          <template #label>{{ parseTime(item.createdAt, '{y}-{m}-{d} {h}:{i}:{s}') }}</template>
           <template #default>
             <span><van-icon name="star" color="#ee0a24" /> {{ item.point }}</span>
           </template>
@@ -59,7 +59,7 @@
 
 <script>
 import { Dialog } from 'vant'
-
+import { parseTime, getTimestamp } from '@/utils/js-tools'
 import { getGymDetail, buyGood } from '@/service/gym'
 export default {
   data() {

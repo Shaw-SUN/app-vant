@@ -34,13 +34,14 @@
         </van-field>
         <van-field v-model="goodForm.mark" label="补充信息" clearable placeholder="请输入" :rules="[{ required: true, message: '请填写补充信息' }]" />
         <van-field v-model="goodForm.price" type="number" label="价格" clearable placeholder="元" :rules="[{ required: true, message: '请填写价格' }]" />
-        <van-field v-model="goodForm.time" type="number" label="使用时间" clearable placeholder="小时" :rules="[{ required: true, message: '请填写使用时间' }]" />
+        <van-field v-model="goodForm.time" label="使用时间" clearable placeholder="例 8：00-10：00" :rules="[{ required: true, message: '请填写使用时间' }]" />
+        <van-field v-model="goodForm.date" label="使用日期" clearable placeholder="例 12.25-12.26" :rules="[{ required: true, message: '请填写使用日期' }]" />
         <van-field v-model="goodForm.frequency" type="number" label="每人可购买次数" clearable placeholder="次" :rules="[{ required: true, message: '请填写每人可购买次数' }]" />
         <van-field v-model="goodForm.stock" type="number" label="库存" clearable placeholder="个" :rules="[{ required: true, message: '请填写库存' }]" />
-        <van-field readonly clickable name="datetimePicker" :value="goodForm.date" label="使用时间" placeholder="点击选择时间" @click="showTimePicker = true" :rules="[{ required: true, message: '请填写时间' }]" />
+        <!-- <van-field readonly clickable name="datetimePicker" :value="goodForm.date" label="使用时间" placeholder="点击选择时间" @click="showTimePicker = true" :rules="[{ required: true, message: '请填写时间' }]" />
         <van-popup v-model="showTimePicker" position="bottom">
           <van-datetime-picker type="date" @confirm="onConfirm" @cancel="showTimePicker = false" :min-date="minDate" :max-date="maxDate" />
-        </van-popup>
+        </van-popup> -->
       </van-form>
     </van-dialog>
   </div>
