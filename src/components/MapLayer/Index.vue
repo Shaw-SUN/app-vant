@@ -117,8 +117,8 @@ export default {
       }
     },
     submitLocation() {
-      const { name, location } = this
-      this.resolve({ name, location })
+      const { name, location, longitude, latitude } = this
+      this.resolve({ name, location, longitude, latitude })
       this.hide()
     },
     // 经纬度反解 地址
@@ -181,6 +181,7 @@ export default {
     height: 100%;
   }
   .location-info{
+    margin-bottom:100px 
     position:absolute;
     right:0;
     bottom:0;

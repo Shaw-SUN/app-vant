@@ -5,6 +5,7 @@
       <van-form ref="infoForm">
         <van-field v-model="infoForm.name" label="名称" clearable placeholder="请输入" :rules="[{ required: true, message: '请填写名称' }]" v-if="title !== '编辑'" />
         <van-field v-model="infoForm.address" label="地址" clearable placeholder="请输入" :rules="[{ required: true, message: '请填写地址' }]" />
+        <van-cell title="地图选点" isLink @click="openMap()"></van-cell>
         <van-field v-model="infoForm.phone" type="tel" label="联系电话" clearable placeholder="请输入" :rules="[{ required: true, message: '请填写联系电话' }]" />
         <van-field v-model="infoForm.area" type="number" label="占地面积" clearable placeholder="平方米" :rules="[{ required: true, message: '请填写占地面积' }]" />
         <van-field v-model="infoForm.content" label="详情" clearable rows="2" type="textarea" placeholder="请输入" :rules="[{ required: true, message: '请填写详情' }]" />
@@ -66,7 +67,7 @@ export default {
   },
   mounted() {
     this.title = this.$route.query.action
-    this.getLocation()
+    //this.getLocation()
     this.getInfo()
   },
   methods: {
@@ -102,15 +103,13 @@ export default {
       }
     },
     /**获取地图定位*/
-    getLocation() {
+    /*     getLocation() {
       let that = this
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           function (position) {
             that.infoForm.longitude = position.coords.longitude
             that.infoForm.latitude = position.coords.latitude
-            /* alert('经度：' + position.coords.latitude)
-            alert('纬度：' + position.coords.longitude) */
           },
           function (error) {
             switch (error.code) {
@@ -133,6 +132,29 @@ export default {
       } else {
         alert('Geolocation is not supported by this browser.')
       }
+    }, */
+    initMap() {
+      const that = this
+      AMapLoader.load({
+        key: '3d34a78642a6d5fd2e80361e2d8b29e9', // 申请好的Web端开发者Key，首次调用 load 时必填
+        version: '2.0', // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+        plugins: [''] // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+      })
+        .then((AMap) => {
+          that.AMap = AMap
+          this.drawMap()
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    },
+    openMap() {
+      this.$mapLayer().then((res) => {
+        console.log(res);
+        this.infoForm.longitude = res.longitude
+        this.infoForm.latitude = res.latitude
+        this.infoForm.address = res.location
+      })
     },
     onConfirm(time) {
       this.infoForm.time = parseTime(time, '{y}-{m}-{d}')
