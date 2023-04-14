@@ -1,6 +1,6 @@
 module.exports = {
   // transpileDependencies: ['vue-awesome-swiper', 'swiper', 'dom7', 'vue-signature-pad', 'signature_pad', 'merge-images'],
-  publicPath: '/',
+  publicPath: '/app/',
   css: {
     loaderOptions: {
       stylus: {

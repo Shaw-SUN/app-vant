@@ -12,7 +12,7 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter)
 // const _base = process.env.NODE_ENV == 'development' ? '' : ''
 export const router = new VueRouter({
-  base: '/',
+  base: '/app',
   mode: 'history',
   routes
 })
