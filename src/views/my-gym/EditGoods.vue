@@ -102,7 +102,7 @@ export default {
         .then(() => {
           putGood(id).then(() => {
             this.$toast('成功')
-            window.location.reload()
+            this.getDetail()
           })
         })
         .catch(() => {
@@ -116,7 +116,7 @@ export default {
         .then(() => {
           pullGood(id).then(() => {
             this.$toast('成功')
-            window.location.reload()
+            this.getDetail()
           })
         })
         .catch(() => {
@@ -130,7 +130,7 @@ export default {
         .then(() => {
           deleteGood(id).then(() => {
             this.$toast('成功')
-            window.location.reload()
+            this.getDetail()
           })
         })
         .catch(() => {
@@ -169,12 +169,12 @@ export default {
           if (this.action == 'add') {
             addGood(this.goodForm).then(() => {
               this.$toast('成功')
-              window.location.reload()
+              this.getDetail()
             })
           } else if (this.action == 'edit') {
             editGood(this.goodForm).then(() => {
               this.$toast('成功')
-              window.location.reload()
+              this.getDetail()
             })
           }
         })
