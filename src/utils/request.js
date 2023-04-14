@@ -77,8 +77,8 @@ service.interceptors.response.use(
       return res.data
     } else if (res.status == 200 && code == 10000) {
       removeToken()
+      window.location.reload()
       
-      this.$router.push('/login')
     } else {
       // 是否取消默认处理
       if (preventDefault) {

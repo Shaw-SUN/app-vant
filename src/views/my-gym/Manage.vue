@@ -32,7 +32,7 @@
         <van-cell title="驳回原因" v-if="info.state == 3" :value="info.refuseReason"></van-cell>
       </div>
 
-      <div v-if="info.state == 1" class="action">
+      <div v-if="info.state == 1" class="action" style="margin-bottom: 100px">
         <van-cell title="商品列表" is-link @click="toGoods(info.id)"></van-cell>
         <van-cell title="订单列表" is-link @click="toOrder()"></van-cell>
         <van-cell title="核销订单" is-link @click="useAction()"></van-cell>
