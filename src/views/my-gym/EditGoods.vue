@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <van-nav-bar title="商品列表" left-text="返回" left-arrow right-text="新增" @click-left="onClickLeft" @click-right="onClickRight" />
-    <van-card v-for="(item, index) in detail.goodList" :key="index" :price="item.price.toFixed(2)" :thumb="item.logoUrl" class="card">
+    <van-card v-for="(item, index) in goodList" :key="index" :price="item.price.toFixed(2)" :thumb="item.logoUrl" class="card">
       <template #title>
         <div class="name">{{ item.name }}</div>
       </template>
@@ -9,14 +9,14 @@
         <span>剩余：{{ item.stock }} </span>
         <span>已售：{{ item.sale }}</span>
       </template>
-      <template #tags>
+      <!--       <template #tags>
         <div><van-icon name="fire-o" color="#ee0a24" />{{ item.frequency }}</div>
-      </template>
+      </template> -->
       <template #num>
-        <van-button size="mini" @click="edit(item.id)">编辑</van-button>
-        <van-button size="mini" @click="put(item.id)">上架</van-button>
-        <van-button size="mini" @click="pull(item.id)">下架</van-button>
-        <van-button size="mini" @click="deleteAction(item.id)">删除</van-button>
+        <van-button v-if="item.state == 0" size="mini" @click="edit(item.id)">编辑</van-button>
+        <van-button v-if="item.state == 0" size="mini" @click="put(item.id)">上架</van-button>
+        <van-button size="mini" v-if="item.state == 1" @click="pull(item.id)">下架</van-button>
+        <van-button v-if="item.state == 0" size="mini" @click="deleteAction(item.id)">删除</van-button>
       </template>
     </van-card>
     <van-dialog v-model="showDialog" show-cancel-button @confirm="onsubmit()">
@@ -47,9 +47,11 @@
 </template>
 
 <script>
+import { Dialog } from 'vant'
+
 import { getGymDetail } from '@/service/gym'
-import { addGood, editGood } from '@/service/user'
-import { getGoodDetail, putGood, pullGood, deleteGood } from '@/service/gym'
+import { addGood, editGood, getGymGoods, getGymGoodDetail } from '@/service/user'
+import { putGood, pullGood, deleteGood } from '@/service/gym'
 import { parseTime, getTimestamp } from '@/utils/js-tools'
 import { uploadFile } from '@/service/upload'
 
@@ -57,7 +59,7 @@ export default {
   data() {
     return {
       action: '',
-      detail: {},
+      goodList: [],
       //评价
       showDialog: false,
       goodForm: {},
@@ -82,21 +84,24 @@ export default {
       this.action = 'add'
     },
     edit(id) {
-      getGoodDetail(id).then(() => {
+      getGymGoodDetail(id).then((res) => {
         this.goodForm = res.data
+        this.uploader1 = []
+        this.uploader2 = []
+        this.uploader1.push({ url: res.data.logoUrl, isImage: true })
+        this.uploader2.push({ url: res.data.detailUrl, isImage: true })
       })
       this.showDialog = true
       this.action = 'edit'
     },
     put(id) {
       Dialog.confirm({
-        message: '确认取消吗？'
+        message: '确认上架吗？'
       })
         .then(() => {
           putGood(id).then(() => {
             this.$toast('成功')
-            this.refreshing = true
-            this.onRefresh()
+            window.location.reload()
           })
         })
         .catch(() => {
@@ -105,13 +110,12 @@ export default {
     },
     pull(id) {
       Dialog.confirm({
-        message: '确认取消吗？'
+        message: '下架会导致所有未核销的订单自动退款，是否确定下架？'
       })
         .then(() => {
           pullGood(id).then(() => {
             this.$toast('成功')
-            this.refreshing = true
-            this.onRefresh()
+            window.location.reload()
           })
         })
         .catch(() => {
@@ -120,13 +124,12 @@ export default {
     },
     deleteAction(id) {
       Dialog.confirm({
-        message: '确认取消吗？'
+        message: '确认删除吗？'
       })
         .then(() => {
           deleteGood(id).then(() => {
             this.$toast('成功')
-            this.refreshing = true
-            this.onRefresh()
+            window.location.reload()
           })
         })
         .catch(() => {
@@ -134,8 +137,8 @@ export default {
         })
     },
     getDetail() {
-      getGymDetail(this.$route.query.id).then((res) => {
-        this.detail = res.data
+      getGymGoods().then((res) => {
+        this.goodList = res.data
       })
     },
     onConfirm(time) {
@@ -165,14 +168,12 @@ export default {
           if (this.action == 'add') {
             addGood(this.goodForm).then(() => {
               this.$toast('成功')
-              this.refreshing = true
-              this.onRefresh()
+              window.location.reload()
             })
           } else if (this.action == 'edit') {
             editGood(this.goodForm).then(() => {
               this.$toast('成功')
-              this.refreshing = true
-              this.onRefresh()
+              window.location.reload()
             })
           }
         })

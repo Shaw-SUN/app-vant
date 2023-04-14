@@ -10,6 +10,16 @@
         <van-field v-model="infoForm.content" label="详情" clearable rows="2" type="textarea" placeholder="请输入" :rules="[{ required: true, message: '请填写详情' }]" />
         <van-field readonly clickable name="datetimePicker" :value="infoForm.time" label="运营时间" placeholder="点击选择时间" @click="showTimePicker = true" :rules="[{ required: true, message: '请填写时间' }]" />
         <van-popup v-model="showTimePicker" position="bottom">
+          <!--           <van-datetime-picker
+  v-model="currentTime"
+  type="time"
+  title="开始时间"
+/>
+          <van-datetime-picker
+  v-model="currentTime"
+  type="time"
+  title="结束时间"
+/> -->
           <van-datetime-picker type="date" @confirm="onConfirm" @cancel="showTimePicker = false" :min-date="minDate" :max-date="maxDate" />
         </van-popup>
         <van-field name="uploader1" label="Logo">
@@ -22,7 +32,7 @@
             <van-uploader v-model="uploader2" multiple :max-count="1" :after-read="afterRead2" />
           </template>
         </van-field>
-        <van-field name="uploader3" label="营业执照" v-if="title !== '编辑'">
+        <van-field name="uploader3" label="营业执照">
           <template #input>
             <van-uploader v-model="uploader3" multiple :max-count="1" :after-read="afterRead3" />
           </template>
@@ -41,6 +51,7 @@ export default {
   data() {
     return {
       title: '',
+      currentTime: '',
       infoForm: {
         name: '',
         address: '',

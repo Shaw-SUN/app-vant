@@ -62,3 +62,12 @@ export function editGood(params) {
 }
 
 
+export function getGymGoods() {
+  return request.get(`/api/gym/good/own`)
+}
+
+
+export function getGymGoodDetail(id) {
+  return request.get(`/api/gym/good/own/${id}`)
+}
+

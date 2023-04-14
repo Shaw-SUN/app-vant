@@ -58,6 +58,8 @@
 </template>
 
 <script>
+import { Dialog } from 'vant'
+
 import { getGymDetail, buyGood } from '@/service/gym'
 export default {
   data() {
