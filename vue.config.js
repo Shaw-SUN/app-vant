@@ -9,10 +9,10 @@ module.exports = {
     }
   },
   devServer: {
-    https: false,
+    https: true,
     proxy: {
       '/api': {
-        target: 'http://moonquakes.club', //测试
+        target: 'https://moonquakes.club', //测试
         ws: false,
         changeOrigin: true
       },
