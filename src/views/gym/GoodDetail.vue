@@ -24,10 +24,10 @@
         </div>
       </van-tab>
       <van-tab title="评论" name="comments">
-        <van-cell v-for="(item, index) in detail.commentList" :key="index">
+        <van-cell v-for="(item, index) in detail.commentList" :key="index" @click="toComment(item.id)">
           <template #title>
             <div class="content">{{ item.content }}</div>
-            <div><van-image width="80" height="80" :src="detail.detailUrl" /></div>
+            <div><van-image width="80" height="80" :src="item.picUrl" /></div>
           </template>
           <template #label>{{ parseTime(item.createdAt, '{y}-{m}-{d} {h}:{i}:{s}') }}</template>
           <template #default>
@@ -56,6 +56,12 @@ export default {
   methods: {
     onClickLeft() {
       this.$router.go(-1)
+    },
+    toComment(id) {
+      this.$router.push({
+        path: '/gym/comment',
+        query: { id: id }
+      })
     },
     getDetail() {
       getGoodDetail(this.$route.query.id).then((res) => {

@@ -27,6 +27,15 @@ let myRoutes = [
     }
   },
   {
+    path: '/order/detail',
+    name: 'OrderDetail',
+    component: () => import('@/views/my-order/Detail.vue'),
+    meta: {
+      title: '订单详情',
+      keepAlive: false
+    }
+  },
+  {
     path: '/my/gym',
     name: 'MyGym',
     component: () => import('@/views/my-gym/Manage.vue'),

@@ -16,7 +16,8 @@
             <div>{{ parseTime(item.createdAt * 1000) }}</div>
           </template>
           <template #num>
-            <van-button size="mini" v-if="item.state == 1" @click="useAction(item.id)">核销</van-button>
+            <van-button size="mini" v-if="item.state == 1" @click="toDetail(item.id)">详情</van-button>
+            <!-- <van-button size="mini" v-if="item.state == 1" @click="useAction(item.id)">核销</van-button> -->
             <van-button size="mini" v-if="item.state == 1" @click="cancelAction(item.id)">取消</van-button>
             <van-button size="mini" v-if="item.state == 2 && item.isComment == 0" @click="commentAction(item.id)">评价</van-button>
             <van-button size="mini" v-if="item.state == 2 && item.isComment == 1" disabled>已评价</van-button>
@@ -108,6 +109,12 @@ export default {
       // 将 loading 设置为 true，表示处于加载状态
       this.loading = true
       this.getList()
+    },
+    toDetail(id) {
+      this.$router.push({
+        path: '/order/detail',
+        query: { id: id }
+      })
     },
     commentAction(id) {
       this.showDialog = true

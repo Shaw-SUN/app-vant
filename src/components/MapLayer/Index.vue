@@ -35,6 +35,7 @@ export default {
     }
   },
   mounted() {
+    this.getLocation()
     this.initMap()
   },
   watch: {
@@ -50,11 +51,42 @@ export default {
     }
   },
   methods: {
+    /* 当前定位 */
+    getLocation() {
+      let that = this
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            that.longitude = position.coords.longitude
+            that.latitude = position.coords.latitude
+          },
+          function (error) {
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                alert('用户拒绝对获取地理位置的请求。')
+                break
+              case error.POSITION_UNAVAILABLE:
+                alert('位置信息是不可用的。')
+                break
+              case error.TIMEOUT:
+                alert('请求用户地理位置超时。')
+                break
+              case error.UNKNOWN_ERROR:
+                alert('未知错误。')
+                break
+            }
+          },
+          { enableHighAcuracy: true }
+        )
+      } else {
+        alert('Geolocation is not supported by this browser.')
+      }
+    },
     // 初始化地图
     initMap() {
       const that = this
       AMapLoader.load({
-        key: 'cf91d9b650ad38fe050309055fdb2d20', // 申请好的Web端开发者Key，首次调用 load 时必填
+        key: '3d34a78642a6d5fd2e80361e2d8b29e9	', // 申请好的Web端开发者Key，首次调用 load 时必填
         version: '2.0', // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
         plugins: [''] // 需要使用的的插件列表，如比例尺'AMap.Scale'等
       })
@@ -78,6 +110,7 @@ export default {
             imageSize: new that.AMap.Size(21, 24.5) //根据所设置的大小拉伸或压缩图片
           })
           that.drawMap()
+          that.getAddress()
         })
         .catch((e) => {
           console.log(e)
@@ -128,7 +161,8 @@ export default {
       AMap.plugin('AMap.Geocoder', function () {
         var geocoder = new AMap.Geocoder({
           // city 指定进行编码查询的城市，支持传入城市名、adcode 和 citycode
-          city: '常熟'
+          //city: '常熟'
+          city: '全国'
         })
         var lnglat = [Number(lng), Number(lat)]
         geocoder.getAddress(lnglat, function (status, result) {

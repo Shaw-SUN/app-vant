@@ -25,6 +25,15 @@ let gymRoutes = [
       title: '商品详情',
       keepAlive: false
     }
+  },
+  {
+    path: '/gym/comment',
+    name: 'CommentDetail',
+    component: () => import('@/views/gym/CommentDetail.vue'),
+    meta: {
+      title: '评论详情',
+      keepAlive: false
+    }
   }
 ]
 

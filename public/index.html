@@ -9,13 +9,20 @@
     <!-- <link rel="dns-prefetch" href="//cdnfile-s3.gususerv.com" /> -->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title></title>
-   <!--  <script src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script> -->
-<!--     <script type="text/javascript">
+
+    <script type="text/javascript">
+      window._AMapSecurityConfig = {
+        securityJsCode: '3ccd6f6364732a3c42f19a50a8e27db7'
+      }
+    </script>
+
+    <!--  <script src="//res.wx.qq.com/open/js/jweixin-1.6.0.js"></script> -->
+    <!--     <script type="text/javascript">
         window._AMapSecurityConfig = {
           securityJsCode: 'd4462ba4e9b89e0a730e973097ff91b1'
         } -->
-      <!-- 强制禁止用户修改微信客户端的字体大小---begin--- -->
-        <!-- ;(function () {
+    <!-- 强制禁止用户修改微信客户端的字体大小---begin--- -->
+    <!-- ;(function () {
           if (typeof WeixinJSBridge == 'object' && typeof WeixinJSBridge.invoke == 'function') {
             handleFontSize()
           } else {

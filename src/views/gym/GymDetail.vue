@@ -20,7 +20,7 @@
     <van-tabs v-model="activeName" sticky>
       <van-tab title="详情" name="detail">
         <div class="detail">
-          <div id="mapDiv" style="width: 300px; height: 150px;margin-bottom: 30px" ></div>
+          <div id="mapDiv" style="width: 300px; height: 150px; margin-bottom: 30px;"></div>
           <div class="content">详情：{{ detail.content }}</div>
           <van-image width="100" height="100" :src="detail.detailUrl" />
         </div>
@@ -43,10 +43,10 @@
         </van-card>
       </van-tab>
       <van-tab title="评论" name="comments">
-        <van-cell v-for="(item, index) in detail.commentList" :key="index">
+        <van-cell v-for="(item, index) in detail.commentList" :key="index" @click="toComment(item.id)">
           <template #title>
             <div class="content">{{ item.content }}</div>
-            <div><van-image width="80" height="80" :src="detail.detailUrl" /></div>
+            <div><van-image width="80" height="80" :src="item.picUrl" /></div>
           </template>
           <template #label>{{ parseTime(item.createdAt, '{y}-{m}-{d} {h}:{i}:{s}') }}</template>
           <template #default>
@@ -99,6 +99,12 @@ export default {
     toGood(id) {
       this.$router.push({
         path: '/gym/good',
+        query: { id: id }
+      })
+    },
+    toComment(id) {
+      this.$router.push({
+        path: '/gym/comment',
         query: { id: id }
       })
     },

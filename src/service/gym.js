@@ -12,6 +12,10 @@ export function getGoodDetail(id) {
   return request.get(`/api/app/good/detail/${id}`)
 }
 
+export function getCommentDetail(id) {
+  return request.get(`/api/app/comment/detail/${id}`)
+}
+
 export function buyGood(id) {
   return request.post(`/api/app/good/buy/${id}`)
 }

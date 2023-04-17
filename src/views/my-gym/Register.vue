@@ -150,7 +150,7 @@ export default {
     },
     openMap() {
       this.$mapLayer().then((res) => {
-        console.log(res);
+        console.log(res)
         this.infoForm.longitude = res.longitude
         this.infoForm.latitude = res.latitude
         this.infoForm.address = res.location
