@@ -1,9 +1,9 @@
 <template>
   <div class="page-container">
     <van-nav-bar title="我的健身房" left-text="返回" left-arrow @click-left="onClickLeft" />
-    <van-cell title="暂无健身房" value="注册" is-link @click="toRegister('注册')" v-if="info.state == 4"></van-cell>
-    <div v-if="info.state !== 4">
-      <van-cell is-link center value="编辑" @click="toRegister('编辑')">
+    <van-cell title="暂无健身房" value="注册" is-link @click="toRegister('注册')" v-if="info.state == 4 || info.state == 3"></van-cell>
+    <div>
+      <van-cell is-link center value="编辑" @click="toRegister('编辑')" v-if="info.state == 1 || info.state == 2">
         <template #title>
           <div class="header">
             <div><van-image round width="50" height="50" :src="info.logoUrl" /></div>
@@ -32,7 +32,7 @@
         <van-cell title="驳回原因" v-if="info.state == 3" :value="info.refuseReason"></van-cell>
       </div>
 
-      <div v-if="info.state == 1" class="action" style="margin-bottom: 100px">
+      <div v-if="info.state == 1" class="action" style="margin-bottom: 100px;">
         <van-cell title="商品列表" is-link @click="toGoods(info.id)"></van-cell>
         <van-cell title="订单列表" is-link @click="toOrder()"></van-cell>
         <van-cell title="核销订单" is-link @click="useAction()"></van-cell>

@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <van-nav-bar title="订单详情" left-text="返回" left-arrow @click-left="onClickLeft" />
-    <van-card class="card" thumb="https://img01.yzcdn.cn/vant/ipad.jpeg" :price="detail.price.toFixed(2)">
+    <van-card class="card" :thumb="detail.logoUrl" :price="detail.price.toFixed(2)">
       <template #title>
         <div class="name">{{ detail.goodName }}</div>
       </template>

@@ -9,7 +9,7 @@
     </van-tabs>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="getList" class="list">
-        <van-card v-for="(item, index) in list" :key="index" :desc="item.gymName" :price="item.price.toFixed(2)" thumb="https://img01.yzcdn.cn/vant/ipad.jpeg" class="card">
+        <van-card v-for="(item, index) in list" :key="index" :desc="item.gymName" :price="item.price.toFixed(2)" :thumb="item.logoUrl">
           <template #title>
             <div class="name">{{ item.goodName }}</div>
           </template>
