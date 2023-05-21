@@ -10,7 +10,11 @@
             <span>已售：{{ detail.sale }}</span>
           </template>
           <template #tags>
-            <div><van-icon name="fire-o" color="#ee0a24" />{{ detail.frequency }}</div>
+            <div>
+              <div><van-icon name="contact" color="#ee0a24" />每人限购：{{ detail.frequency }}</div>
+              <span><van-icon name="todo-list-o" color="#ee0a24" />可用日期：{{ detail.date }}</span>
+              <div><van-icon name="clock-o" color="#ee0a24" />可用时间：{{ detail.time }}</div>
+            </div>
           </template>
           <template #num>
             <van-button size="mini" @click="toBuy(detail.id)">购买</van-button>
