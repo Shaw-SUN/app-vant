@@ -167,10 +167,12 @@ export default {
     },
     afterRead(file) {
       //console.log(file)
+      file.status = 'uploading';
       let formData = new FormData()
       formData.append('file', file.file)
       uploadFile(formData).then((res) => {
         this.commentForm.picUrl = res.url
+        file.status = 'done';
       })
     },
     onsubmit() {

@@ -162,10 +162,12 @@ export default {
     },
     afterRead1(file) {
       //console.log(file)
+      file.status = 'uploading';
       let formData = new FormData()
       formData.append('file', file.file)
       uploadFile(formData).then((res) => {
         this.infoForm.logoUrl = res.url
+        file.status = 'done';
       })
     },
     afterRead2(file) {
@@ -174,14 +176,17 @@ export default {
       formData.append('file', file.file)
       uploadFile(formData).then((res) => {
         this.infoForm.detailUrl = res.url
+        file.status = 'done';
       })
     },
     afterRead3(file) {
       //console.log(file)
+      file.status = 'uploading';
       let formData = new FormData()
       formData.append('file', file.file)
       uploadFile(formData).then((res) => {
         this.infoForm.auditUrl = res.url
+        file.status = 'done';
       })
     }
   }

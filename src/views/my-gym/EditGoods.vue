@@ -148,18 +148,22 @@ export default {
     },
     afterRead1(file) {
       //console.log(file)
+      file.status = 'uploading';
       let formData = new FormData()
       formData.append('file', file.file)
       uploadFile(formData).then((res) => {
         this.goodForm.logoUrl = res.url
+        file.status = 'done';
       })
     },
     afterRead2(file) {
       //console.log(file)
+      file.status = 'uploading';
       let formData = new FormData()
       formData.append('file', file.file)
       uploadFile(formData).then((res) => {
         this.goodForm.detailUrl = res.url
+        file.status = 'done';
       })
     },
     onsubmit() {
